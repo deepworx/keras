@@ -769,7 +769,7 @@ def dropout(x, level, seed=None):
     if seed is None:
         seed = np.random.randint(10e6)
     rng = RandomStreams(seed=seed)
-    retain_prob = 1. - level
+    retain_prob = cast(1., _FLOATX) - level
     x *= rng.binomial(x.shape, p=retain_prob, dtype=x.dtype)
     x /= retain_prob
     return x
